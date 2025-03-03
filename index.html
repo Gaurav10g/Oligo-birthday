@@ -6,125 +6,141 @@
     <title>Happy Birthday Olivia!</title>
     <style>
         body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #a2a2f9, #f5f5f5);
-            color: #333;
             margin: 0;
             padding: 0;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #ff6b81, #ff4757);
+            font-family: 'Pacifico', cursive, sans-serif;
             overflow: hidden;
         }
-
-        h1 {
-            font-size: 4em;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            margin-top: 50px;
-            color: #6a5acd;
-            animation: fadeIn 3s ease-in-out;
+        .card-container {
+            position: relative;
+            width: 400px; /* Increased size */
+            height: 500px; /* Increased size */
+            perspective: 1000px;
         }
-
-        img {
-            width: 400px;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-            margin-top: 20px;
-            animation: zoomIn 2s ease-in-out;
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s;
         }
-
-        .message {
-            font-size: 1.8em;
-            margin-top: 30px;
-            color: #6a5acd;
-            animation: slideUp 2s ease-out;
+        .card.open {
+            transform: rotateY(180deg);
         }
-
-        .poem {
-            font-size: 1.5em;
-            margin-top: 40px;
-            color: #333;
-            font-style: italic;
-            max-width: 80%;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.8;
-            animation: fadeIn 4s ease-in-out;
-        }
-
-        .balloon {
+        .front, .inside {
+            width: 100%;
+            height: 100%;
             position: absolute;
-            width: 50px;
-            height: 80px;
-            background-color: #d3c0d3;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .front {
+            background: white;
+            color: red;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            flex-direction: column;
+        }
+        .front span {
+            font-size: 50px;
+        }
+        .inside {
+            background: red;
+            color: white;
+            transform: rotateY(180deg);
+            flex-direction: column;
+            padding: 30px;
+            font-size: 32px;
+        }
+        .inside h2 {
+            font-size: 40px;
+        }
+        .inside p {
+            font-size: 30px;
+        }
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .floating-elements div {
+            position: absolute;
+            width: 30px; /* Increased size */
+            height: 30px; /* Increased size */
             border-radius: 50%;
-            animation: float 3s ease-in-out infinite;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: floatUp 2s ease-out forwards;
         }
-
-        .balloon1 { left: 10%; animation-delay: 0s; }
-        .balloon2 { left: 30%; animation-delay: 1s; }
-        .balloon3 { left: 50%; animation-delay: 2s; }
-        .balloon4 { left: 70%; animation-delay: 3s; }
-        .balloon5 { left: 90%; animation-delay: 4s; }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+        .flowers {
+            background: pink;
         }
-
-        @keyframes zoomIn {
-            0% { transform: scale(0.5); }
-            100% { transform: scale(1); }
+        .hearts {
+            background: red;
+            width: 35px; /* Increased size */
+            height: 35px; /* Increased size */
         }
-
-        @keyframes slideUp {
-            0% { transform: translateY(30px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
+        .stars {
+            background: yellow;
+            width: 28px; /* Increased size */
+            height: 28px; /* Increased size */
         }
-
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-50px); }
-            100% { transform: translateY(0); }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-300px) scale(2); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <h1>🎉 Happy Birthday Olivia! 🎂</h1>
-    <img src="https://source.unsplash.com/400x400/?birthday,cake" alt="Birthday Cake">
-    <p class="message">Wishing you a fantastic year ahead filled with joy, success, and lots of love! 🥳</p>
-
-    <div class="poem">
-        <p>
-            On your special day, Olivia dear, <br>
-            May all your dreams come true this year.<br>
-            With happiness that never ends, <br>
-            And joy that lasts through all your trends.<br><br>
-            A wish for love, a wish for light, <br>
-            For you to shine so clear, so bright.<br>
-            May laughter echo, hearts align, <br>
-            Happy Birthday, Olivia, you're divine! 🎉
-        </p>
+    <div class="card-container">
+        <div class="card" id="birthdayCard">
+            <div class="front" onclick="openCard()">
+                <span>🎂🎈</span>
+                <p>Click Here Birthday Gurl 🎉</p>
+                <span>💖🎁</span>
+            </div>
+            <div class="inside">
+                <h2>Happy Birthday Olivia! 🎂</h2>
+                <p>Wishing you all the happiness and love in the world and you are 18, but make sure to not lose that inner child inside you—it makes you a lot more beautiful ❤️</p>
+                <p>May your day be filled with joy and laughter! 🌟</p>
+            </div>
+        </div>
+        <div class="floating-elements" id="floatingElements"></div>
     </div>
 
-    <!-- Balloons -->
-    <div class="balloon balloon1"></div>
-    <div class="balloon balloon2"></div>
-    <div class="balloon balloon3"></div>
-    <div class="balloon balloon4"></div>
-    <div class="balloon balloon5"></div>
-
-    <audio controls autoplay>
-        <source src="happy-birthday-song.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+    <script>
+        function openCard() {
+            document.getElementById('birthdayCard').classList.add('open');
+            createFloatingElements('flowers', 30);
+            createFloatingElements('hearts', 20);
+            createFloatingElements('stars', 15);
+        }
+        function createFloatingElements(className, count) {
+            const container = document.getElementById('floatingElements');
+            const containerRect = container.getBoundingClientRect();
+            for (let i = 0; i < count; i++) {
+                let element = document.createElement('div');
+                element.classList.add(className);
+                element.style.left = Math.random() * containerRect.width + 'px';
+                element.style.top = containerRect.height + 'px';
+                container.appendChild(element);
+                setTimeout(() => element.remove(), 2000);
+            }
+        }
+    </script>
 </body>
 </html>
-<ALOASK-SEPARATE-EDITORS>html {
-   background: linear-gradient(to right, dodgerblue 0%, deepskyblue 100%);
-}
-h1{
-   color: white;
-}
-<ALOASK-SEPARATE-EDITORS>console.log('JavaScript Console');
